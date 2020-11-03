@@ -3,10 +3,31 @@
 #include <unordered_map>
 #include "dependencies/conversions.hpp"
 #include "dependencies/tree.hpp"
+#include "dependencies/count freq.hpp"
 using namespace std;
 
-unordered_map<char, int> freq;
+unordered_map<char, int> freq,temp;
 int totcount = 0;
+
+void implement_tree()
+{
+    hufftree *root = new hufftree(totcount);
+    hufftree *curr = root;
+    int temp_count = freq.size();
+    for(int i=0; i<temp_count; i++)
+    {
+        char ch = max_freq(freq);
+        int value = freq[ch];
+        freq.erase(ch);
+        temp[ch] = value;
+
+        hufftree *node = new hufftree(temp[ch]);
+        curr ->right = node;
+        node = new hufftree(curr ->data - temp[ch]);
+        curr ->left = node;
+        curr = curr ->left;
+    }
+}
 
 void calcfreq(string input)
 {
