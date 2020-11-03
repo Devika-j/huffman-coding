@@ -14,7 +14,7 @@ int main()
     for(int i=0; input[i] != '\0'; i++)
         cout << input[i];
 
-    cout << "\nSize of text : " << sizeof(input);
+    cout << "\nSize of text : " << sizeof(input) << endl;
     strToBinary(input);
 
     cin.get();
