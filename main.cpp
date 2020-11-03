@@ -17,6 +17,7 @@ int main()
     cout << "\nSize of text : " << sizeof(input) << endl;
     strToBinary(input);
 
-    cin.get();
+    int n;
+    cin >> n;
     return 0;
 }
