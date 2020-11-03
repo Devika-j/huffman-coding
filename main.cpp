@@ -13,7 +13,8 @@ void implement_tree()
 {
     hufftree *root = new hufftree(totcount);
     hufftree *curr = root;
-    for(int i=0; i<freq.size(); i++)
+    int temp_count = freq.size();
+    for(int i=0; i<temp_count; i++)
     {
         char ch = max_freq(freq);
         int value = freq[ch];
