@@ -16,3 +16,4 @@ char max_freq(unordered_map<char,int> freq)
 
     return ch;
 }
+

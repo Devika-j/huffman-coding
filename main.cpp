@@ -3,13 +3,35 @@
 #include <unordered_map>
 #include "dependencies/conversions.hpp"
 #include "dependencies/tree.hpp"
-#include "dependencies/count freq.hpp"
+#include "dependencies/map.hpp"
 using namespace std;
 
 unordered_map<char, int> freq,temp;
-int totcount = 0;
+int totcount = 0;   
+unordered_map<char, string> freq2;
 
-void implement_tree()
+char find_key_value(int data)
+{
+    for(auto i : temp)
+    {
+        if(i.second == data)
+            return i.first;
+    }
+}
+
+void encode(hufftree *root, string s = '\0')
+{
+    if(root == NULL)
+    {
+        freq2[find_key_value(root ->data)] = s;
+    }
+
+    encode(root ->right, s+'1');
+    encode(root ->left, s+'2');
+
+}
+
+hufftree *implement_tree()
 {
     hufftree *root = new hufftree(totcount);
     hufftree *curr = root;
@@ -27,6 +49,7 @@ void implement_tree()
         curr ->left = node;
         curr = curr ->left;
     }
+    return root;
 }
 
 void calcfreq(string input)
@@ -52,6 +75,8 @@ int main()
     cout << "\nSize of text : " << totcount << endl;
     strToBinary(input);
     calcfreq(input);
+    hufftree *root = implement_tree();
+    encode(root);
 
     int n;
     cin >> n;
