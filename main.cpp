@@ -2,10 +2,11 @@
 #include <iostream>
 #include <unordered_map>
 #include "dependencies/conversions.hpp"
-
+#include "dependencies/tree.hpp"
 using namespace std;
 
 unordered_map<char, int> freq;
+int totcount = 0;
 
 void calcfreq(string input)
 {
@@ -24,11 +25,10 @@ int main()
     for (int i = 0; input[i] != '\0'; i++)
         cout << input[i];
 
-    int size = 0;
     for (int i = 0; input[i] != '\0'; i++)
-        size++;
+        totcount++;
 
-    cout << "\nSize of text : " << size << endl;
+    cout << "\nSize of text : " << totcount << endl;
     strToBinary(input);
     calcfreq(input);
 
