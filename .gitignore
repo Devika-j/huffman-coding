@@ -1,0 +1,7 @@
+# This file includes all the list of files not to be targeted for staging
+
+## Visual Studio Code ##
+.vscode/
+
+## Extentions ##
+main.exe
