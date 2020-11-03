@@ -27,7 +27,7 @@ void encode(hufftree *root, string s = '\0')
     }
 
     encode(root ->right, s+'1');
-    encode(root ->left, s+'2');
+    encode(root ->left, s+'0');
 
 }
 
