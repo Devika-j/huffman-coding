@@ -4,11 +4,28 @@
 #include "dependencies/conversions.hpp"
 #include "dependencies/tree.hpp"
 #include "dependencies/map.hpp"
+#include "dependencies/graphics.hpp"
+
+#ifdef _Win64
+#include <windows.h>
+#else
+#include <unistd.h>
+#endif
+
 using namespace std;
 
 unordered_map<char, int> freq,temp;
 int totcount = 0;   
 unordered_map<char, string> freq2;
+
+void compressed(string s)
+{
+    gotoxy(50, 1);
+    cout << "Size after compression is: " << sizeof(hufftree);
+    cout << "Compressed encoded message is:" << endl;
+    for(int i=0; s[i] != '\0'; i++)
+        cout << freq2[s[i]];
+}
 
 char find_key_value(int data)
 {
@@ -22,13 +39,10 @@ char find_key_value(int data)
 void encode(hufftree *root, string s = '\0')
 {
     if(root == NULL)
-    {
         freq2[find_key_value(root ->data)] = s;
-    }
 
     encode(root ->right, s+'1');
     encode(root ->left, s+'0');
-
 }
 
 hufftree *implement_tree()
@@ -76,7 +90,8 @@ int main()
     strToBinary(input);
     calcfreq(input);
     hufftree *root = implement_tree();
-    encode(root);
+    encode(root);                       //Causing the program to exit instantly.
+    compressed(input);
 
     int n;
     cin >> n;
