@@ -1,8 +1,9 @@
 os: windows
 language: cpp
-# compiler: 
-#   - g++
+compiler: 
+  - g++
+build: 
+  - make
 script:
- - g++ main.cpp
- - ./a. out
-
+  - g++ main.cpp
+  
