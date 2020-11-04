@@ -1,4 +1,5 @@
 # Huffman Coding
+<img alt="CircleCI" src="https://img.shields.io/circleci/build/github/krush11/sales-management/master">
 
 This is a tool to visualize to what extent Huffman coding would compress a file.
 
