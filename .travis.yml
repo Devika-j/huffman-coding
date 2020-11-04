@@ -1,9 +1,17 @@
+## Operatign System ##
 os: windows
+
+## Language ##
 language: cpp
+
+## Compiler used ##
 compiler: 
+  - gcc
+  - clang
   - g++
-build: 
-  - make
-script:
-  - g++ main.cpp
+
+## bash commands ##
+  script:
+  - make && ./main.out
+
   
