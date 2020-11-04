@@ -2,3 +2,6 @@ os: windows
 language: cpp
 compiler: 
   - g++
+build: 
+  - make
+
