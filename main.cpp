@@ -97,7 +97,7 @@ int main()
     strToBinary(input);
     calcfreq(input);
     hufftree *root = implement_tree();
-    encode(root);
+    encode(root);                       //Causing the program to exit instantly.
     compressed(input);
 
     int n;
