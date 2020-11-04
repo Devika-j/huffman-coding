@@ -2,33 +2,54 @@
 #include <iostream>
 #include <unordered_map>
 #include "dependencies/conversions.hpp"
-#include "dependencies/tree.hpp"
 #include "dependencies/map.hpp"
+#include "dependencies/tree.hpp"
+#include "dependencies/graphics.hpp"
+
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <unistd.h>
+#endif
+
 using namespace std;
 
-unordered_map<char, int> freq,temp;
-int totcount = 0;   
+unordered_map<char, int> freq, temp;
+int totcount = 0;
 unordered_map<char, string> freq2;
+
+void compressed(string s)
+{
+    gotoxy(50, 1);
+    cout << "Size after compression is: " << sizeof(hufftree);
+    cout << "Compressed encoded message is:" << endl;
+    for(int i=0; s[i] != '\0'; i++)
+        cout << freq2[s[i]];
+}
 
 char find_key_value(int data)
 {
-    for(auto i : temp)
-    {
-        if(i.second == data)
+    for (auto i : temp)
+        if (i.second == data)
             return i.first;
-    }
 }
 
 void encode(hufftree *root, string s = '\0')
 {
-    if(root == NULL)
+    if (root->left == NULL && root->right == NULL)
     {
-        freq2[find_key_value(root ->data)] = s;
+        freq2[find_key_value(root->data)] = s;
+        return;
     }
-
-    encode(root ->right, s+'1');
-    encode(root ->left, s+'0');
-
+    else if (root->left == NULL)
+        encode(root->right, s + '1');
+    else if (root->right == NULL)
+        encode(root->left, s + '0');
+    else
+    {
+        encode(root->right, s + '1');
+        encode(root->left, s + '0');
+    }
 }
 
 hufftree *implement_tree()
@@ -36,7 +57,7 @@ hufftree *implement_tree()
     hufftree *root = new hufftree(totcount);
     hufftree *curr = root;
     int temp_count = freq.size();
-    for(int i=0; i<temp_count; i++)
+    for (int i = 0; i < temp_count; i++)
     {
         char ch = max_freq(freq);
         int value = freq[ch];
@@ -44,10 +65,10 @@ hufftree *implement_tree()
         temp[ch] = value;
 
         hufftree *node = new hufftree(temp[ch]);
-        curr ->right = node;
-        node = new hufftree(curr ->data - temp[ch]);
-        curr ->left = node;
-        curr = curr ->left;
+        curr->right = node;
+        node = new hufftree(curr->data - temp[ch]);
+        curr->left = node;
+        curr = curr->left;
     }
     return root;
 }
@@ -76,7 +97,8 @@ int main()
     strToBinary(input);
     calcfreq(input);
     hufftree *root = implement_tree();
-    encode(root);
+    encode(root);                       //Causing the program to exit instantly.
+    compressed(input);
 
     int n;
     cin >> n;
