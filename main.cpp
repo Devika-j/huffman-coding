@@ -20,9 +20,9 @@ unordered_map<char, string> freq2;
 
 void compressed(string s)
 {
-    gotoxy(50, 1);
-    cout << "Size after compression is: " << sizeof(hufftree);
-    cout << "Compressed encoded message is:" << endl;
+    //gotoxy(50, 1);
+    cout << "\nSize after compression is: " << sizeof(hufftree);
+    cout << "\nCompressed encoded message is:" << endl;
     for(int i=0; s[i] != '\0'; i++)
         cout << freq2[s[i]];
 }
@@ -34,7 +34,7 @@ char find_key_value(int data)
             return i.first;
 }
 
-void encode(hufftree *root, string s = '\0')
+void encode(hufftree *root, string s="\0")
 {
     if (root->left == NULL && root->right == NULL)
     {
@@ -42,13 +42,13 @@ void encode(hufftree *root, string s = '\0')
         return;
     }
     else if (root->left == NULL)
-        encode(root->right, s + '1');
+        encode(root->right, s + "1");
     else if (root->right == NULL)
-        encode(root->left, s + '0');
+        encode(root->left, s + "0");
     else
     {
-        encode(root->right, s + '1');
-        encode(root->left, s + '0');
+        encode(root->right, s + "1");
+        encode(root->left, s + "0");
     }
 }
 
@@ -89,10 +89,8 @@ int main()
     cout << "Text : ";
     for (int i = 0; input[i] != '\0'; i++)
         cout << input[i];
-
     for (int i = 0; input[i] != '\0'; i++)
         totcount++;
-
     cout << "\nSize of text : " << totcount << endl;
     strToBinary(input);
     calcfreq(input);
